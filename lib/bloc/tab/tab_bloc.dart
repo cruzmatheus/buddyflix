@@ -4,7 +4,6 @@ import 'package:buddyflix/model/app_tab.dart';
 import '../bloc.dart';
 
 class TabBloc extends Bloc<TabEvent, AppTab> {
-
   @override
   AppTab get initialState => AppTab.home;
 

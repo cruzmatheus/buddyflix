@@ -1,3 +1,4 @@
+import 'package:buddyflix/model/genre_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -7,3 +8,11 @@ abstract class HomeState extends Equatable {
 }
 
 class InitialHomeState extends HomeState {}
+
+class GenresFetchedState extends HomeState {
+  final List<GenreResponse> genres;
+
+  GenresFetchedState({this.genres}) : super([genres]);
+
+  String toString() => "GenresFetchedState { genres sizer: ${genres.length}";
+}

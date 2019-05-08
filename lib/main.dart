@@ -1,4 +1,5 @@
 import 'package:buddyflix/bloc/bloc.dart';
+import 'package:buddyflix/page/home.dart';
 import 'package:buddyflix/widget/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,15 +23,15 @@ class MyApp extends StatelessWidget {
                 primaryColor: Colors.black,
                 accentColor: Colors.black,
                 brightness: Brightness.dark),
-            home: Scaffold(body: HomePage())));
+            home: Scaffold(body: MainPage())));
   }
 }
 
-class HomePage extends StatefulWidget {
-  _HomePageState createState() => _HomePageState();
+class MainPage extends StatefulWidget {
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   TabBloc _tabBloc;
 
   @override
@@ -56,9 +57,9 @@ class _HomePageState extends State<HomePage> {
                 BlocProvider<TabBloc>(bloc: _tabBloc),
               ],
               child: Scaffold(
-                body: activeTab == AppTab.home
-                    ? Center(child: Text("Home"))
-                    : Center(child: Text("Other")),
+                body: (activeTab == AppTab.home)
+                    ? HomePage()
+                    : Center(child: Text(activeTab.toString())),
                 bottomNavigationBar: BottomTab(
                   activeTab: activeTab,
                   onTabSelected: (tab) =>

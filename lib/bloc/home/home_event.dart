@@ -5,3 +5,5 @@ import 'package:meta/meta.dart';
 abstract class HomeEvent extends Equatable {
   HomeEvent([List props = const []]) : super(props);
 }
+
+class FetchGenres extends HomeEvent {}
