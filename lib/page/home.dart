@@ -54,6 +54,7 @@ class _HomePage extends State<HomePage> {
               itemBuilder: (BuildContext context, int index) {
                 return buildMovieImageWidget(movies[index]);
               },
+              itemCount: movies.length,
             ),
           ))
         ],
@@ -67,7 +68,7 @@ class _HomePage extends State<HomePage> {
       width: 130,
       child: Image(
         // image: AssetImage("assets/1.jpg"),
-        image: NetworkImage(movie.getBackdropPath()),
+        image: NetworkImage(movie.getPosterPath()),
         fit: BoxFit.fitHeight,
       ),
     );
