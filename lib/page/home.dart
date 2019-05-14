@@ -9,10 +9,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  final HomeBloc _homeBloc = HomeBloc();
+
+  @override
+  void dispose() {
+    _homeBloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final HomeBloc _homeBloc = HomeBloc();
-
     return BlocBuilder(
       bloc: _homeBloc,
       builder: (BuildContext context, HomeState homeState) {

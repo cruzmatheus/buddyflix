@@ -46,7 +46,32 @@ class MovieProvider {
           .map((data) => new MovieResponse.fromJson(data))
           .toList();
     } else {
-      throw Exception("Error retrieving genres. Status code: " +
+      throw Exception("Error retrieving movies by genres. Status code: " +
+          response.statusCode.toString());
+    }
+  }
+
+  Future<List<MovieResponse>> searchMoviesByTerm(String searchTerm) async {
+    final String query = "&query=" + searchTerm;
+    final String page = "&page=1";
+    final String includeAdult = "&include_adult=false";
+
+    final String requestUri = _baseApiUri +
+        "/search/movie?api_key=" +
+        _apiKey +
+        _apiLanguage +
+        query +
+        page +
+        includeAdult;
+
+    final http.Response response = await http.get(requestUri);
+
+    if (response.statusCode == 200) {
+      return (json.decode(response.body)['results'] as List)
+          .map((data) => new MovieResponse.fromJson(data))
+          .toList();
+    } else {
+      throw Exception("Error retrieving movies by term. Status code: " +
           response.statusCode.toString());
     }
   }

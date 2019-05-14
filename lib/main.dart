@@ -1,5 +1,6 @@
 import 'package:buddyflix/bloc/bloc.dart';
 import 'package:buddyflix/page/home.dart';
+import 'package:buddyflix/page/search.dart';
 import 'package:buddyflix/widget/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,9 +58,7 @@ class _MainPageState extends State<MainPage> {
                 BlocProvider<TabBloc>(bloc: _tabBloc),
               ],
               child: Scaffold(
-                body: (activeTab == AppTab.home)
-                    ? HomePage()
-                    : Center(child: Text(activeTab.toString())),
+                body: _getViewTab(activeTab),
                 bottomNavigationBar: BottomTab(
                   activeTab: activeTab,
                   onTabSelected: (tab) =>
@@ -67,5 +66,22 @@ class _MainPageState extends State<MainPage> {
                 ),
               ));
         });
+  }
+
+  Widget _getViewTab(AppTab activeTab) {
+    switch (activeTab) {
+      case AppTab.home:
+        {
+          return HomePage();
+        }
+      case AppTab.search:
+        {
+          return SearchPage();
+        }
+      default:
+        {
+          return Center(child: Text(activeTab.toString()));
+        }
+    }
   }
 }

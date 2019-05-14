@@ -9,6 +9,8 @@ import '../bloc.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GenreRepository genreRepository = GenreRepository();
   final MovieRepository movieRepository = MovieRepository();
+  final Map<String, List<MovieResponse>> moviesByGenre = {};
+  List<GenreResponse> genres;
 
   @override
   HomeState get initialState => InitialHomeState();
@@ -16,15 +18,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is FetchGenres) {
-      final List<GenreResponse> genres =
-          (await genreRepository.retrieveGenresList()).sublist(0, 7);
+      if (moviesByGenre.isEmpty || genres.isEmpty) {
+        genres = (await genreRepository.retrieveGenresList()).sublist(0, 7);
 
-      final Map<String, List<MovieResponse>> moviesByGenre = {};
-
-      for (var genre in genres) {
-        final List<MovieResponse> movies =
-            await movieRepository.discoverMoviesByGenre(genre.id);
-        moviesByGenre[genre.name] = movies;
+        for (var genre in genres) {
+          final List<MovieResponse> movies =
+              await movieRepository.discoverMoviesByGenre(genre.id);
+          moviesByGenre[genre.name] = movies;
+        }
       }
 
       yield GenresFetchedState(genres: genres, moviesByGenre: moviesByGenre);

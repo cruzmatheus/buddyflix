@@ -11,6 +11,10 @@ class MovieResponse {
   }
 
   String getPosterPath() {
-    return "https://image.tmdb.org/t/p/w342/" + posterPath;
+    try {
+      return "https://image.tmdb.org/t/p/w342/" + posterPath;
+    } on Exception catch (e) {
+      return "";
+    }
   }
 }

@@ -7,4 +7,8 @@ class MovieRepository {
   Future<List<MovieResponse>> discoverMoviesByGenre(int genre) async {
     return await _provider.discoverMoviesByGenre(genre);
   }
+
+  Future<List<MovieResponse>> searchMoviesByTerm(String searchTerm) async {
+    return await _provider.searchMoviesByTerm(searchTerm);
+  }
 }
