@@ -17,7 +17,7 @@ class _SearchPageState extends State<SearchPage> {
 
   _onSearchTermChanged() {
     if (_debounce?.isActive ?? false) _debounce.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
       final String searchTerm = _searchQuery.text;
       if (searchTerm.isNotEmpty) {
         _searchBloc.dispatch(FetchMovies(searchTerm));
@@ -35,6 +35,7 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     _searchQuery.removeListener(_onSearchTermChanged);
     _searchQuery.dispose();
+    _searchBloc.dispose();
     super.dispose();
   }
 
@@ -44,31 +45,18 @@ class _SearchPageState extends State<SearchPage> {
         bloc: _searchBloc,
         builder: (BuildContext context, SearchState state) {
           if (state is UnsearchedMoviesState) {
-            return Container(
-                padding: EdgeInsets.only(top: 30),
-                child: TextField(
-                  controller: _searchQuery,
-                  //   onChanged: (term) {
-                  //   _searchBloc.dispatch(FetchMovies(term));
-                  // }
-                ));
+            return buildSearchTextField();
           } else if (state is SearchedMoviesState) {
             return CustomScrollView(
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildListDelegate(
-                    [
-                      Container(
-                          padding: EdgeInsets.only(top: 30),
-                          child: TextField(
-                            controller: _searchQuery,
-                          ))
-                    ],
+                    [buildSearchTextField()],
                   ),
                 ),
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
+                      crossAxisCount: 3),
                   delegate: SliverChildListDelegate(
                     buildMovieImageWidget(state.movies),
                   ),
@@ -88,14 +76,24 @@ class _SearchPageState extends State<SearchPage> {
           children: <Widget>[
             Expanded(
               child: Image(
-                  image: NetworkImage(movie.getPosterPath()),
+                  image: movie.getPosterPath().isNotEmpty
+                      ? NetworkImage(movie.getPosterPath())
+                      : AssetImage('assets/not_found.png'),
                   fit: BoxFit.fitHeight),
             )
           ],
         ),
       ));
     }
-
     return moviesWidgets;
+  }
+
+  Widget buildSearchTextField() {
+    return Container(
+        padding: EdgeInsets.only(top: 30, right: 15, left: 15),
+        child: TextField(
+          decoration: InputDecoration(hintText: "Enter a movie name"),
+          controller: _searchQuery,
+        ));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:buddyflix/bloc/bloc.dart';
-import 'package:buddyflix/page/home.dart';
-import 'package:buddyflix/page/search.dart';
+import 'package:buddyflix/page/home_page.dart';
+import 'package:buddyflix/page/search_page.dart';
 import 'package:buddyflix/widget/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +52,6 @@ class _MainPageState extends State<MainPage> {
     return BlocBuilder(
         bloc: _tabBloc,
         builder: (BuildContext context, AppTab activeTab) {
-//          print(activeTab);
           return BlocProviderTree(
               blocProviders: [
                 BlocProvider<TabBloc>(bloc: _tabBloc),
