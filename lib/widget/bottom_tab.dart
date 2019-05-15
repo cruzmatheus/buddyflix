@@ -40,9 +40,9 @@ class BottomTab extends StatelessWidget {
                 style: TextStyle(color: Colors.grey),
               )),
           BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz, color: Colors.grey),
+              icon: Icon(Icons.info, color: Colors.grey),
               title: Text(
-                "More",
+                "About me",
                 style: TextStyle(color: Colors.grey),
               ))
         ].toList());

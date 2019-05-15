@@ -1,4 +1,5 @@
 import 'package:buddyflix/bloc/bloc.dart';
+import 'package:buddyflix/page/about_page.dart';
 import 'package:buddyflix/page/home_page.dart';
 import 'package:buddyflix/page/search_page.dart';
 import 'package:buddyflix/widget/bottom_tab.dart';
@@ -76,6 +77,10 @@ class _MainPageState extends State<MainPage> {
       case AppTab.search:
         {
           return SearchPage();
+        }
+      case AppTab.about:
+        {
+          return AboutPage();
         }
       default:
         {
