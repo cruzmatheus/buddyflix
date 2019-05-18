@@ -1,4 +1,4 @@
-package com.example.buddyflix;
+package com.cruzmatheus.buddyflix;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

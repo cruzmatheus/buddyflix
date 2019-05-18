@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
               child: Image(
                   image: movie.getPosterPath().isNotEmpty
                       ? NetworkImage(movie.getPosterPath())
-                      : AssetImage('assets/images/not_found.png'),
+                      : AssetImage('assets/not_found.png'),
                   fit: BoxFit.fitHeight),
             )
           ],
