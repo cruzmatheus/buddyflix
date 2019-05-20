@@ -5,6 +5,8 @@ import 'package:buddyflix/page/search_page.dart';
 import 'package:buddyflix/widget/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 import './model/app_tab.dart';
 
@@ -14,12 +16,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final homeBloc = HomeBloc();
+  FirebaseAnalytics analytics = FirebaseAnalytics();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         bloc: homeBloc,
         child: MaterialApp(
+            navigatorObservers: [
+              FirebaseAnalyticsObserver(analytics: analytics)
+            ],
             title: 'BuddyFLix',
             theme: new ThemeData(
                 primaryColor: Colors.black,

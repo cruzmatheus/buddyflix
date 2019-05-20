@@ -2,6 +2,7 @@
 key.properties
 key.jks
 secrets.json
+google-services.json
 
 # Miscellaneous
 *.class
