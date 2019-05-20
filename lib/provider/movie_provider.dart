@@ -2,14 +2,17 @@ import 'dart:convert';
 
 import 'package:buddyflix/model/genre_response.dart';
 import 'package:buddyflix/model/movie_response.dart';
+import 'package:buddyflix/secret_loader.dart';
 import 'package:http/http.dart' as http;
+
+import '../secrets.dart';
 
 class MovieProvider {
   final String _baseApiUri = "https://api.themoviedb.org/3";
-  final String _apiKey = "YOUR API KEY HERE";
   final String _apiLanguage = "&language=en-US";
 
   Future<List<GenreResponse>> retrieveGenresList() async {
+    String _apiKey = await _getApiKey();
     final http.Response response = await http.get(
         _baseApiUri + "/genre/movie/list?api_key=" + _apiKey + _apiLanguage);
 
@@ -23,6 +26,7 @@ class MovieProvider {
   }
 
   Future<List<MovieResponse>> discoverMoviesByGenre(int genre) async {
+    String _apiKey = await _getApiKey();
     final String sort = "&sort_by=popularity.desc";
     final String includeAdult = "&include_adult=false";
     final String includeVideo = "&include_video=false";
@@ -52,6 +56,7 @@ class MovieProvider {
   }
 
   Future<List<MovieResponse>> searchMoviesByTerm(String searchTerm) async {
+    String _apiKey = await _getApiKey();
     final String query = "&query=" + searchTerm;
     final String page = "&page=1";
     final String includeAdult = "&include_adult=false";
@@ -74,5 +79,10 @@ class MovieProvider {
       throw Exception("Error retrieving movies by term. Status code: " +
           response.statusCode.toString());
     }
+  }
+
+  Future<String> _getApiKey() async {
+    Secret apiKey = await SecretLoader(secretPath: "secrets.json").load();
+    return apiKey.movieApi;
   }
 }

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
         bloc: homeBloc,
         child: MaterialApp(
-            title: 'Startup Name Generator',
+            title: 'BuddyFLix',
             theme: new ThemeData(
                 primaryColor: Colors.black,
                 accentColor: Colors.black,
