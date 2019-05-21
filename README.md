@@ -1,16 +1,21 @@
-# buddyflix
+# BuddyFlix
 
-A new Flutter project.
+This app was created in order to study Futter + Dart development. It means to be a Netflix clone app, but only to search movie titles.
 
-## Getting Started
+![](buddyflix_1.png) ![](buddyflix_2.png)
 
-This project is a starting point for a Flutter application.
+## Running the app
 
-A few resources to get you started if this is your first Flutter project:
+Before running the app, you'll need to get a api key of MovieDB. Then create `secrets.json` in the root folder, just as shown below:
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+    {
+        "moviedb_api_key": "YOUR API KEY HERE"
+    }
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+It should be enough. Then just run the command:
+
+    $ flutter run
+
+It is also available on Play Store
+[![](play_store.png)](https://play.google.com/store/apps/details?id=com.cruzmatheus.buddyflix)
+
